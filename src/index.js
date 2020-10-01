@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 
 export const sizes = {
+  iphone: 375, // small phone will check less than this amount to determine
   tablet: 768,
   laptop: 992,
+  macbookAir: 1440,
   desktop: 1170
 };
 
@@ -10,30 +12,42 @@ export function useDevice(breakpoints = sizes) {
   if (typeof window === "undefined") {
     return {};
   }
-  const isMOBILE = "isMOBILE";
-  const isTABLET = "isTABLET";
-  const isLAPTOP = "isLAPTOP";
-  const isDESKTOP = "isDESKTOP";
+  const isMobile = "isMobile";
+  const isTablet = "isTablet";
+  const isLaptop = "isLaptop";
+  const isDesktop = "isDesktop";
+  const isMacbookAir = "isMacbookAir";
+  const isSmallPhone = "isSmallPhone";
+
+  const { isMobile, isTablet, isLaptop, isDesktop, isMacbookAir, isSmallPhone } = useDevice();
 
   const onLoadDevice = () => {
-    return window.innerWidth < breakpoints.tablet
-      ? isMOBILE
+    return device === window.innerWidth === breakpoints.macbookAir
+      ? isMacbookAir
+      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.iphone
+      ? isSmallPhone
+      : window.innerWidth < breakpoints.tablet
+      ? isMobile
       : window.innerWidth < breakpoints.laptop
-      ? isTABLET
+      ? isTablet
       : window.innerWidth < breakpoints.desktop
-      ? isLAPTOP
-      : isDESKTOP;
+      ? isLaptop
+      : isDesktop;
   };
 
   const [device, setDevice] = useState(onLoadDevice());
   const onResizeDevice = () => {
-    return window.innerWidth < breakpoints.tablet
-      ? setDevice(isMOBILE)
+    return device === window.innerWidth === breakpoints.macbookAir
+      ? setDevice(isMacbookAir)
+      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.iphone
+      ? setDevice(isSmallPhone)
+      : window.innerWidth < breakpoints.tablet
+      ? setDevice(isMobile)
       : window.innerWidth < breakpoints.laptop
-      ? setDevice(isTABLET)
+      ? setDevice(isTablet)
       : window.innerWidth < breakpoints.desktop
-      ? setDevice(isLAPTOP)
-      : setDevice(isDESKTOP);
+      ? setDevice(isLaptop)
+      : setDevice(isDesktop);
   };
 
   useEffect(() => {
@@ -44,9 +58,12 @@ export function useDevice(breakpoints = sizes) {
   }, []);
 
   return {
-    isMOBILE: device === isMOBILE,
-    isTABLET: device === isTABLET,
-    isLAPTOP: device === isLAPTOP,
-    isDESKTOP: device === isDESKTOP
+    isMobile: device === isMobile,
+    isTablet: device === isTablet,
+    isLaptop: device === isLaptop,
+    isDesktop: device === isDesktop,
+    isMacbookAir: device === isMacbookAir,
+    isSmallPhone: device === isSmallPhone,
+    isDesktop: device === isDesktop,
   };
 }

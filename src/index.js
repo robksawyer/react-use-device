@@ -19,12 +19,10 @@ export function useDevice(breakpoints = sizes) {
   const isMacbookAir = "isMacbookAir";
   const isSmallPhone = "isSmallPhone";
 
-  const { isMobile, isTablet, isLaptop, isDesktop, isMacbookAir, isSmallPhone } = useDevice();
-
   const onLoadDevice = () => {
-    return device === window.innerWidth === breakpoints.macbookAir
+    return window.innerWidth === breakpoints.macbookAir
       ? isMacbookAir
-      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
+      : window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
       ? isSmallPhone
       : window.innerWidth < breakpoints.tablet
       ? isMobile
@@ -37,9 +35,9 @@ export function useDevice(breakpoints = sizes) {
 
   const [device, setDevice] = useState(onLoadDevice());
   const onResizeDevice = () => {
-    return device === window.innerWidth === breakpoints.macbookAir
+    return (device === window.innerWidth) === breakpoints.macbookAir
       ? setDevice(isMacbookAir)
-      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
+      : device === window.innerWidth < breakpoints.phone
       ? setDevice(isSmallPhone)
       : window.innerWidth < breakpoints.tablet
       ? setDevice(isMobile)

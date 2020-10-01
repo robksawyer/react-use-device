@@ -34,7 +34,7 @@ function useDevice(breakpoints) {
       setDevice = _useState[1];
 
   var onResizeDevice = function onResizeDevice() {
-    return device === window.innerWidth === breakpoints.macbookAir ? setDevice(isMacbookAir) : device === window.innerWidth < breakpoints.phone ? setDevice(isSmallPhone) : window.innerWidth < breakpoints.tablet ? setDevice(isMobile) : window.innerWidth < breakpoints.laptop ? setDevice(isTablet) : window.innerWidth < breakpoints.desktop ? setDevice(isLaptop) : setDevice(isDesktop);
+    return device === (window.innerWidth === breakpoints.macbookAir) ? setDevice(isMacbookAir) : device === window.innerWidth < breakpoints.phone ? setDevice(isSmallPhone) : window.innerWidth < breakpoints.tablet ? setDevice(isMobile) : window.innerWidth < breakpoints.laptop ? setDevice(isTablet) : window.innerWidth < breakpoints.desktop ? setDevice(isLaptop) : setDevice(isDesktop);
   };
 
   react.useEffect(function () {

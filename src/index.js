@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 export const sizes = {
   phone: 375, // small phone will check less than this amount to determine
-  tablet: 768,
-  laptop: 992,
+  // smallTablet: 768, // iPad
+  tablet: 768, // 1024 iPad pro
+  laptop: 992, // What happens to this?
   macbookAir: 1440,
   desktop: 1170
 };
@@ -18,6 +19,7 @@ export function useDevice(breakpoints = sizes) {
   const isDesktop = "isDesktop";
   const isMacbookAir = "isMacbookAir";
   const isSmallPhone = "isSmallPhone";
+  // const isSmallTablet = "isSmallTablet";
 
   const onLoadDevice = () => {
     return window.innerWidth === breakpoints.macbookAir
@@ -35,7 +37,7 @@ export function useDevice(breakpoints = sizes) {
 
   const [device, setDevice] = useState(onLoadDevice());
   const onResizeDevice = () => {
-    return (device === window.innerWidth) === breakpoints.macbookAir
+    return device === (window.innerWidth === breakpoints.macbookAir)
       ? setDevice(isMacbookAir)
       : device === window.innerWidth < breakpoints.phone
       ? setDevice(isSmallPhone)

@@ -16,10 +16,10 @@ npm install --save react-use-device
 
 ```jsx
 {
-    isMOBILE: device === isMOBILE,   // up to winndow.innerWidth of 768px
-    isTABLET: device === isTABLET,   // up to winndow.innerWidth of 992px
-    isLAPTOP: device === isLAPTOP,   // up to winndow.innerWidth of 1170
-    isDESKTOP: device === isDESKTOP  // from window.innerWidth of 1170 up
+    isMobile: device === isMobile,   // up to winndow.innerWidth of 768px
+    isTablet: device === isTablet,   // up to winndow.innerWidth of 992px
+    isLaptop: device === isLaptop,   // up to winndow.innerWidth of 1170
+    isDesktop: device === isDesktop  // from window.innerWidth of 1170 up
 };
 ```
 
@@ -31,14 +31,14 @@ import React from "react";
 import { useDevice } from "react-use-device";
 
 const MyComponent = () => {
-  const { isMOBILE, isTABLET, isLAPTOP, isDESKTOP } = useDevice();
+  const { isMobile, isTablet, isLaptop, isDesktop } = useDevice();
 
   return (
     <section>
-      {isMOBILE && <h1>I am a mobile screen</h1>}
-      {isTABLET && <h1>I am a tablet screen</h1>}
-      {isLAPTOP && <h1>I am a laptop screen</h1>}
-      {isDESKTOP && <h1>I am a desktop screen</h1>}
+      {isMobile && <h1>I am a mobile screen</h1>}
+      {isTablet && <h1>I am a tablet screen</h1>}
+      {isLaptop && <h1>I am a laptop screen</h1>}
+      {isDesktop && <h1>I am a desktop screen</h1>}
     </section>
   );
 };
@@ -52,6 +52,7 @@ export default MyComponent;
 
 ```jsx
 const breakpoints = {
+  phone: 375, // useDevice will return  window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
   tablet: 650, // useDevice will return isMobile for wiewports < 650 and isTablet for viewports > 650
   laptop: 980, // useDevice will return isTablet for wiewports < 980 and isLaptop for viewports > 980
   desktop: 1200 // useDevice will return isLaptop for wiewports < 1200 and isDesktop for viewports > 1200
@@ -67,19 +68,22 @@ import { useDevice } from "react-use-device";
 
 const MyComponent = () => {
   const breakpoints = {
+    phone: 375,
     tablet: 650,
     laptop: 980,
     desktop: 1200
   };
 
-  const { isMOBILE, isTABLET, isLAPTOP, isDESKTOP } = useDevice(breakpoints);
+  const { isMobile, isTablet, isLaptop, isDesktop, isMacbookAir, isSmallPhone } = useDevice(breakpoints);
 
   return (
     <section>
-      {isMOBILE && <h1>I am a mobile screen</h1>}
-      {isTABLET && <h1>I am a tablet screen</h1>}
-      {isLAPTOP && <h1>I am a laptop screen</h1>}
-      {isDESKTOP && <h1>I am a desktop screen</h1>}
+      {isMobile && <h1>I am a mobile screen</h1>}
+      {isTablet && <h1>I am a tablet screen</h1>}
+      {isLaptop && <h1>I am a laptop screen</h1>}
+      {isDesktop && <h1>I am a desktop screen</h1>}
+      {isMacbookAir && <h1>I am a macbook air screen</h1>}
+      {isSmallPhone && <h1>I am a small phone screen</h1>}
     </section>
   );
 };

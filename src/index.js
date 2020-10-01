@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const sizes = {
-  iphone: 375, // small phone will check less than this amount to determine
+  phone: 375, // small phone will check less than this amount to determine
   tablet: 768,
   laptop: 992,
   macbookAir: 1440,
@@ -24,7 +24,7 @@ export function useDevice(breakpoints = sizes) {
   const onLoadDevice = () => {
     return device === window.innerWidth === breakpoints.macbookAir
       ? isMacbookAir
-      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.iphone
+      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
       ? isSmallPhone
       : window.innerWidth < breakpoints.tablet
       ? isMobile
@@ -39,7 +39,7 @@ export function useDevice(breakpoints = sizes) {
   const onResizeDevice = () => {
     return device === window.innerWidth === breakpoints.macbookAir
       ? setDevice(isMacbookAir)
-      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.iphone
+      : device === window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
       ? setDevice(isSmallPhone)
       : window.innerWidth < breakpoints.tablet
       ? setDevice(isMobile)

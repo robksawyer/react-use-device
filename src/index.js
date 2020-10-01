@@ -56,9 +56,9 @@ export function useDevice(breakpoints = sizes) {
   }, []);
 
   return {
-    isMobile: device === isMobile,
+    isMobile: device === isMobile || device === isSmallPhone,
     isTablet: device === isTablet,
-    isLaptop: device === isLaptop,
+    isLaptop: device === isLaptop || device === isMacbookAir,
     isDesktop: device === isDesktop,
     isMacbookAir: device === isMacbookAir,
     isSmallPhone: device === isSmallPhone,

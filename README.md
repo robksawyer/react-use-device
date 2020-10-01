@@ -59,6 +59,8 @@ const breakpoints = {
 };
 ```
 
+> Note: There's a special check to see if the height is greater than the width. If this occurs, tablet is true.
+
 ## Example
 
 ```jsx

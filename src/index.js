@@ -28,7 +28,7 @@ export function useDevice(breakpoints = sizes) {
       ? isSmallPhone
       : window.innerWidth < breakpoints.tablet
       ? isMobile
-      : window.innerWidth < breakpoints.laptop
+      : window.innerWidth < window.innerHeight || window.innerWidth < breakpoints.laptop
       ? isTablet
       : window.innerWidth < breakpoints.desktop
       ? isLaptop
@@ -43,7 +43,7 @@ export function useDevice(breakpoints = sizes) {
       ? setDevice(isSmallPhone)
       : window.innerWidth < breakpoints.tablet
       ? setDevice(isMobile)
-      : window.innerWidth < breakpoints.laptop
+      : window.innerWidth < window.innerHeight || window.innerWidth < breakpoints.laptop
       ? setDevice(isTablet)
       : window.innerWidth < breakpoints.desktop
       ? setDevice(isLaptop)

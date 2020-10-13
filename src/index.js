@@ -6,6 +6,7 @@ export const sizes = {
   tablet: 768, // 1024 iPad pro
   laptop: 992, // What happens to this?
   macbookAir: 1440,
+  smallDesktop: 1280,
   desktop: 1170
 };
 
@@ -18,12 +19,15 @@ export function useDevice(breakpoints = sizes) {
   const isLaptop = "isLaptop";
   const isDesktop = "isDesktop";
   const isMacbookAir = "isMacbookAir";
+  const isSmallDesktop = "isSmallDesktop";
   const isSmallPhone = "isSmallPhone";
   // const isSmallTablet = "isSmallTablet";
 
   const onLoadDevice = () => {
     return window.innerWidth === breakpoints.macbookAir
       ? isMacbookAir
+      : window.innerWidth === breakpoints.smallDesktop
+      ? isSmallDesktop
       : window.innerWidth < breakpoints.tablet && window.innerWidth < breakpoints.phone
       ? isSmallPhone
       : window.innerWidth < breakpoints.tablet
@@ -39,6 +43,8 @@ export function useDevice(breakpoints = sizes) {
   const onResizeDevice = () => {
     return device === (window.innerWidth === breakpoints.macbookAir)
       ? setDevice(isMacbookAir)
+      : device === (window.innerWidth === breakpoints.smallDesktop)
+      ? setDevice(isSmallDesktop)
       : device === window.innerWidth < breakpoints.phone
       ? setDevice(isSmallPhone)
       : window.innerWidth < breakpoints.tablet
@@ -62,8 +68,8 @@ export function useDevice(breakpoints = sizes) {
     isTablet: device === isTablet,
     isLaptop: device === isLaptop || device === isMacbookAir,
     isDesktop: device === isDesktop,
+    isSmallDesktop: device === isSmallDesktop && device !== isTablet && device !== isMobile,
     isMacbookAir: device === isMacbookAir,
-    isSmallPhone: device === isSmallPhone,
-    isDesktop: device === isDesktop,
+    isSmallPhone: device === isSmallPhone
   };
 }

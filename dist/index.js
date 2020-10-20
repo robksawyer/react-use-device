@@ -5,8 +5,8 @@ var sizes = {
   tablet: 768,
   laptop: 992,
   macbookAir: 1440,
-  smallDesktop: 1280,
-  desktop: 1170
+  smallDesktop: 1025,
+  desktop: 1441,
 };
 function useDevice(breakpoints) {
   if (breakpoints === void 0) {
@@ -48,7 +48,7 @@ function useDevice(breakpoints) {
     isTablet: device === isTablet,
     isLaptop: device === isLaptop || device === isMacbookAir,
     isDesktop: device === isDesktop,
-    isSmallDesktop: device === isSmallDesktop && device !== isTablet && device !== isMobile,
+    isSmallDesktop: device === isSmallDesktop && device !== isTablet && device !== isMobile && device !== isDesktop && device !== isMacbookAir,
     isMacbookAir: device === isMacbookAir,
     isSmallPhone: device === isSmallPhone
   };
